@@ -22,4 +22,4 @@ EXPOSE 8000
 EXPOSE 3000
 EXPOSE 6379
 
-CMD ["/backend/start.sh"]
+

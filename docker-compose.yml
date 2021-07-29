@@ -4,28 +4,28 @@ services:
   redis:
     image: redis:alpine
     container_name: redis
-    ports:
-      - 6379:6379
   web:
-    build: ./backend
-    image: lazy_man_reminder/web
+    image: lazy_man_reminder
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: ["/backend/start.sh"]
     container_name: web
     volumes:
       - ./backend:/backend
     environment:
       DEBUG: 'true'
-    image: lazy_man_reminder
     ports:
       - "8000:8000"
       - "2000:2000"
     depends_on:
       - redis
   django-q:
-    build: ./backend
-    image: lazy_man_reminder/djangoq
-    command: python manage.py qcluster
+    image: lazy_man_reminder
+    command: ["python", "manage.py", "qcluster"]
     depends_on:
       - redis
+      - web
   # frontend:
   #   image: cgd2/meanwhile_web:dev
   #   command: ["npm", "start"]
