@@ -4,7 +4,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 import datetime
-from enum import Enum
 import logging
 
 logger = logging.getLogger(__name__)
@@ -12,16 +11,6 @@ logger = logging.getLogger(__name__)
 
 def one_hour_later():
     return timezone.now() + datetime.timedelta(hours=1)
-
-
-class ItemStatus(Enum):
-    DONE = "DONE"
-    UNDONE = "UNDONE"
-    FAILED = "FAILED"
-
-    @classmethod
-    def choices(cls):
-        return [(key.value, key.name) for key in cls]
 
 
 class Item(models.Model):
@@ -32,9 +21,7 @@ class Item(models.Model):
     )
     title = models.CharField(default='Untitled', max_length=128)
     due_time = models.DateTimeField(default=one_hour_later, blank=False)
-    status = models.CharField(
-        max_length=10, choices=ItemStatus.choices(), default=ItemStatus.UNDONE
-    )
+    status = models.CharField(max_length=10, default='UNDONE')
 
     class Meta:
         ordering = ['created']
