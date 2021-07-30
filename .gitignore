@@ -135,7 +135,7 @@ dmypy.json
 .vscode
 
 # Node
-node_modules/
+*/node_modules/
 webpack-stats.json
 assets/bundles/
 

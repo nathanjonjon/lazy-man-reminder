@@ -5,7 +5,7 @@ services:
     image: redis:alpine
     container_name: redis
   web:
-    image: lazy_man_reminder
+    image: lazy_man_reminder/web
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -20,8 +20,9 @@ services:
       - "2000:2000"
     depends_on:
       - redis
+      - frontend
   django-q:
-    image: lazy_man_reminder
+    image: lazy_man_reminder/web
     container_name: task-queue
     volumes:
       - ./backend:/backend
@@ -29,11 +30,12 @@ services:
     depends_on:
       - redis
       - web
-  # frontend:
-  #   image: cgd2/meanwhile_web:dev
-  #   command: ["npm", "start"]
-  #   volumes:
-  #     - ./video/static:/code/video/static
-  #     - ./frontend:/code/frontend
-  #   ports:
-  #     - "3000:3000"
+  frontend:
+    image: lazy_man_reminder/frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - "3000:3000"
