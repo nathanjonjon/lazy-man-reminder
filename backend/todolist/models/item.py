@@ -47,9 +47,10 @@ def set_timer(sender, instance, created, **kwargs):
     a post-save func that schedule a task to remind the user
     """
     if created:
+        ## don't pass model instance to task queue
         schedule(
-            'tasks.timer',
-            instance.owner,
+            'todolist.tasks.timer',
+            instance.owner.username,
             instance.pk,
             schedule_type=Schedule.ONCE,
             next_run=instance.due_time,

@@ -1,12 +1,15 @@
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 import logging
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
 
-def timer(user, item_id):
+def timer(username, item_id):
+    """set a timer to remind users of the due time"""
+    user = User.objects.get(username=username)
     item_instance = user.item_set.get(pk=item_id)
     if item_instance.status == 'UNDONE':
         item_instance.status = 'FAILED'

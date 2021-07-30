@@ -1,13 +1,15 @@
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from django.contrib.auth.models import User
 import logging
 from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
 
-def finish(user, item_id):
+def finish(username, item_id):
     """send message to frontend when an item is done"""
+    user = User.objects.get(username=username)
     item_instance = user.item_set.get(pk=item_id)
 
     try:

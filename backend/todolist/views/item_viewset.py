@@ -35,18 +35,6 @@ class ItemViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save(owner=self._get_user(request))
         headers = self.get_success_headers(serializer.data)
-
-        '''
-        ## Works!
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(
-            str(self._get_user(request).pk),  # Group Name, Should always be string
-            {
-                "type": "notify",  # Custom Function written in the consumers.py
-                "message": "new item",
-            },
-        )
-        '''
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
@@ -71,7 +59,7 @@ class ItemViewSet(viewsets.ModelViewSet):
 
         user = self._get_user(request)
 
-        async_task('tasks.finish', user, item_id)
+        async_task('todolist.tasks.finish', user.username, item_id)
 
         logger.info(f'Item finished. (id: {item_id}, title: {item_instance.title})')
         return Response(
