@@ -1,7 +1,7 @@
-FROM node:8
+FROM node
 
-WORKDIR /app
-COPY . ./
+WORKDIR /frontend
+COPY . /frontend
 
 RUN npm install --silent
 
