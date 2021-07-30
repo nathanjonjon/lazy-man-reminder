@@ -23,6 +23,8 @@ services:
   django-q:
     image: lazy_man_reminder
     container_name: task-queue
+    volumes:
+      - ./backend:/backend
     command: ["python", "manage.py", "qcluster"]
     depends_on:
       - redis
