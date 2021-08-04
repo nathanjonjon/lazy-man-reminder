@@ -23,7 +23,7 @@ export default function AddressBook() {
             <div className="col-md-6 offset-md-3">
                 <div className="mb-3 text-center">
                     <h1>
-                        📒 Lazy Man Reminder of <i>@{user.username}</i>
+                        📙 Lazy Man Reminder of <i>@{user.username}</i>
                     </h1>
                 </div>
                 <div className="text-right">
@@ -35,15 +35,15 @@ export default function AddressBook() {
                     <input
                         value={search}
                         onChange={e => setSearch(e.target.value)}
-                        placeholder="Search for a contact"
+                        placeholder="Search for a title"
                         style={{ fontSize: 22 }}
                         className="form-control"
                     />
                 </div>
                 <div className='list-item mt-5'>
                     {items &&
-                        items.map((contact) => (
-                            <ContactCard key={contact.id} contact={contact} />
+                        items.map((item) => (
+                            <ContactCard key={item.id} item={item} />
                         ))}
                 </div>
             </div>
