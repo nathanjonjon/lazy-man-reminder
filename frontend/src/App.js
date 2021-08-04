@@ -6,7 +6,7 @@ import { ConfigureRj } from "react-rocketjump"
 import { map } from "rxjs/operators"
 import { ajax } from "rxjs/ajax"
 import Login from "./pages/Login"
-import AddressBook from "./pages/AddressBook"
+import Todolist from "./pages/Todolist"
 
 const login = (credentials = {}) =>
   ajax({
@@ -60,7 +60,7 @@ export default function App() {
               <Login />
             </GuestRoute>
             <AuthRoute path="/" exact redirectTo="/login">
-              <AddressBook />
+              <Todolist />
             </AuthRoute>
           </Switch>
         </Router>

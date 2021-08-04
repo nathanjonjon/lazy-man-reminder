@@ -1,4 +1,4 @@
-export default function ContactCard({ item }) {
+export default function TodoItem({ item }) {
     return (
         <div className="list-group-item">
             <div>

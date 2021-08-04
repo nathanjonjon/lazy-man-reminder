@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { rj, useRunRj } from 'react-rocketjump'
 import { ajax } from 'rxjs/ajax'
 import { useAuthActions, useAuthUser } from 'use-eazy-auth'
-import ContactCard from '../components/ContactCard'
+import TodoItem from '../components/TodoItem'
 
 const ItemState = rj({
     effectCaller: rj.configured(),
@@ -43,7 +43,7 @@ export default function AddressBook() {
                 <div className='list-item mt-5'>
                     {items &&
                         items.map((item) => (
-                            <ContactCard key={item.id} item={item} />
+                            <TodoItem key={item.id} item={item} />
                         ))}
                 </div>
             </div>
