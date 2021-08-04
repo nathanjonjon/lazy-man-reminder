@@ -2,6 +2,7 @@ from django.db import transaction
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from todolist.models import Item
+from django.db import models
 from django.contrib.auth.models import User
 from todolist.serializers import ItemSerializer
 from django.shortcuts import get_object_or_404
@@ -92,7 +93,12 @@ class ItemViewSet(viewsets.ModelViewSet):
         """
         Returns a list of items of a user.
         """
-        return self._get_user(self.request).item_set.all()
+        qs = self._get_user(self.request).item_set.all()
+        search = self.request.query_params.get("search", None)
+        if search:
+            qs = qs.filter(models.Q(title__icontains=search))
+
+        return qs
 
     def get_object(self):
         item_id = self.kwargs.get('pk', None)

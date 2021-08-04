@@ -10,7 +10,7 @@ import AddressBook from "./pages/AddressBook"
 
 const login = (credentials = {}) =>
   ajax({
-    url: "/api/token/",
+    url: "/token/",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,14 +23,14 @@ const login = (credentials = {}) =>
     }))
   )
 
-const todolist = token =>
-  ajax.getJSON("/items/", {
+const me = token =>
+  ajax.getJSON("/me/", {
     Authorization: `Bearer ${token}`,
   })
 
 const refresh = refreshToken =>
   ajax({
-    url: "/api/token/refresh/",
+    url: "/token/refresh/",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function ConfigureAuth({ children }) {
 
 export default function App() {
   return (
-    <Auth loginCall={login} meCall={todolist} refreshTokenCall={refresh}>
+    <Auth loginCall={login} meCall={me} refreshTokenCall={refresh}>
       <ConfigureAuth>
         <Router>
           <Switch>
