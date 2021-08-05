@@ -8,6 +8,7 @@
 
 ## General Info
 A full-stack project that allows users to create todo list with timer reminding them of the deadlines of the todo items.
+![](https://github.com/nathanjonjon/lazy-man-reminder/blob/main/todo.png)
 
 
 ## Project Structure
