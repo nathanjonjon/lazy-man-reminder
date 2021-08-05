@@ -3,8 +3,21 @@ import { rj, useRunRj } from 'react-rocketjump'
 import { ajax } from 'rxjs/ajax'
 import { useAuthActions, useAuthUser } from 'use-eazy-auth'
 import TodoItem from '../components/TodoItem'
-import Modal from '../components/Modal'
-import useModal from '../components/useModal'
+import DateTimePicker from 'react-datetime-picker';
+import '../components/modal.css'
+import Modal from 'react-modal';
+import { useForm } from "react-hook-form"
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 const ItemState = rj({
     effectCaller: rj.configured(),
@@ -20,7 +33,34 @@ export default function Todolist() {
     const { logout } = useAuthActions()
     const [search, setSearch] = useState('')
     const [{ data: items }] = useRunRj(ItemState, [search], false)
-    const { toggle, visible } = useModal();
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const { register, handleSubmit } = useForm()
+    const [value, onChange] = useState(new Date());
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+    const onSubmit = (d) => {
+        d.due_time = value
+        // alert(JSON.stringify(d))
+        ajax({
+            url: "/items/",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: d,
+        })
+    }
+
+
     return (
         <div className="row mt-2 p-2">
             <div className="col-md-6 offset-md-3">
@@ -30,10 +70,34 @@ export default function Todolist() {
                     </h1>
                 </div>
                 <div className="text-right">
-                    <button onClick={logout} className="btn btn-light">Log Out</button>
-                    <button onClick={toggle} className="btn btn-light">Add Todo</button>
-                    <Modal visible={visible} toggle={toggle} />
+                    <button onClick={logout}>Log Out</button>
+                    <button onClick={openModal}>Add Todo</button>
                 </div>
+
+                <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Add Todo Modal"
+                >
+                    <div className="mymodal">
+                        <button className="close-btn" type="button" onClick={closeModal}>close</button>
+                        <h3>Anything in mind?</h3>
+                        <p>add new todo item and set a deadline</p>
+                    </div>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <input {...register("title")} placeholder="Untitled" />
+                        <DateTimePicker
+                            onChange={onChange}
+                            value={value}
+                        />
+                        <input type="submit" />
+                    </form>
+
+                </Modal>
+
+
                 <div className="mt-2">
                     <input
                         value={search}
@@ -50,6 +114,6 @@ export default function Todolist() {
                         ))}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
