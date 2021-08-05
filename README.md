@@ -7,7 +7,7 @@
 * [Setup](#setup)
 
 ## General Info
-A full-stack project that allows users to create todo list with timer reminding them of the deadlines of the todo items.
+A full-stack project for users to create todo list with timer reminding them of deadlines of the tasks.
 ![](https://github.com/nathanjonjon/lazy-man-reminder/blob/main/todo.png)
 
 
