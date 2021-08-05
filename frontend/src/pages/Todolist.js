@@ -3,6 +3,8 @@ import { rj, useRunRj } from 'react-rocketjump'
 import { ajax } from 'rxjs/ajax'
 import { useAuthActions, useAuthUser } from 'use-eazy-auth'
 import TodoItem from '../components/TodoItem'
+import Modal from '../components/Modal'
+import useModal from '../components/useModal'
 
 const ItemState = rj({
     effectCaller: rj.configured(),
@@ -12,12 +14,13 @@ const ItemState = rj({
         }),
 })
 
-export default function AddressBook() {
+
+export default function Todolist() {
     const { user } = useAuthUser()
     const { logout } = useAuthActions()
     const [search, setSearch] = useState('')
     const [{ data: items }] = useRunRj(ItemState, [search], false)
-
+    const { toggle, visible } = useModal();
     return (
         <div className="row mt-2 p-2">
             <div className="col-md-6 offset-md-3">
@@ -27,9 +30,9 @@ export default function AddressBook() {
                     </h1>
                 </div>
                 <div className="text-right">
-                    <button onClick={logout} className="btn btn-light">
-                        Log Out
-                    </button>
+                    <button onClick={logout} className="btn btn-light">Log Out</button>
+                    <button onClick={toggle} className="btn btn-light">Add Todo</button>
+                    <Modal visible={visible} toggle={toggle} />
                 </div>
                 <div className="mt-2">
                     <input
