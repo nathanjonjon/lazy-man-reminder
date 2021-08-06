@@ -29,13 +29,14 @@ const ItemState = rj({
 
 
 export default function Todolist() {
-    const { user } = useAuthUser()
+    const { user, token } = useAuthUser()
     const { logout } = useAuthActions()
     const [search, setSearch] = useState('')
     const [{ data: items }] = useRunRj(ItemState, [search], false)
     const [modalIsOpen, setIsOpen] = useState(false);
     const { register, handleSubmit } = useForm()
     const [value, onChange] = useState(new Date());
+
     function openModal() {
         setIsOpen(true);
     }
@@ -47,17 +48,33 @@ export default function Todolist() {
     function closeModal() {
         setIsOpen(false);
     }
+
+
     const onSubmit = (d) => {
         d.due_time = value
-        // alert(JSON.stringify(d))
-        ajax({
-            url: "/items/",
-            method: "POST",
+        fetch("/items/", {
+            body: JSON.stringify(d), // must match 'Content-Type' header
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            // credentials: 'same-origin', // include, same-origin, *omit
             headers: {
-                "Content-Type": "application/json",
+                'content-type': 'application/json',
+                "Authorization": `Bearer ${token}`
             },
-            body: d,
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // *client, no-referrer
         })
+            .then(function (response) {
+                const status = response.status;
+                if (status === 201) {
+                    console.log("Success")
+                    closeModal()
+                }
+                else {
+                    alert(`Failed, status code: ${status}`)
+                }
+            })
     }
 
 
