@@ -4,7 +4,6 @@ import { ajax } from 'rxjs/ajax'
 import { useAuthActions, useAuthUser } from 'use-eazy-auth'
 import TodoItem from '../components/TodoItem'
 import DateTimePicker from 'react-datetime-picker';
-import '../components/modal.css'
 import Modal from 'react-modal';
 import { useForm } from "react-hook-form"
 
@@ -51,19 +50,21 @@ export default function Todolist() {
 
 
     const onSubmit = (d) => {
+        if (!d.title) {
+            d.title = "Untitled";
+        }
         d.due_time = value
         fetch("/items/", {
-            body: JSON.stringify(d), // must match 'Content-Type' header
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            // credentials: 'same-origin', // include, same-origin, *omit
+            body: JSON.stringify(d),
+            cache: 'no-cache',
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Bearer ${token}`
             },
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // *client, no-referrer
+            method: 'POST',
+            mode: 'cors',
+            redirect: 'follow',
+            referrer: 'no-referrer',
         })
             .then(function (response) {
                 const status = response.status;
@@ -74,6 +75,9 @@ export default function Todolist() {
                 else {
                     alert(`Failed, status code: ${status}`)
                 }
+            })
+            .catch(function (error) {
+                console.log(error);
             })
     }
 
@@ -87,8 +91,8 @@ export default function Todolist() {
                     </h1>
                 </div>
                 <div className="text-right">
-                    <button onClick={logout}>Log Out</button>
-                    <button onClick={openModal}>Add Todo</button>
+                    <button className="btn-secondary" onClick={logout}>Log Out</button>
+                    <button className="btn-warning" onClick={openModal}>Add Todo</button>
                 </div>
 
                 <Modal
@@ -99,7 +103,7 @@ export default function Todolist() {
                     contentLabel="Add Todo Modal"
                 >
                     <div className="mymodal">
-                        <button className="close-btn" type="button" onClick={closeModal}>close</button>
+                        <button className="btn-close" type="button" style={{ top: 0, right: 0, position: "absolute" }} onClick={closeModal}></button>
                         <h3>Anything in mind?</h3>
                         <p>add new todo item and set a deadline</p>
                     </div>
@@ -109,7 +113,7 @@ export default function Todolist() {
                             onChange={onChange}
                             value={value}
                         />
-                        <input type="submit" />
+                        <input type="submit" className="btn-warning" />
                     </form>
 
                 </Modal>
