@@ -4,7 +4,7 @@
 * [General info](#general-info)
 * [Project Structure](#project-structure)
 * [Technologies](#technologies)
-* [Setup](#setup)
+* [Usage](#usage)
 
 ## General Info
 A full-stack project for users to create todo list with timer reminding them of deadlines of the tasks.
@@ -27,7 +27,7 @@ Project is created with:
 * Websocket / Django Channels
 * Django-Q
 
-## Setup
+## Usage
 To run this project, install it locally using `docker-compose`
 ```
 $ docker-compose build
