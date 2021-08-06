@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('title', models.CharField(default='Untitled', max_length=128)),
+                ('title', models.CharField(blank=True, default='Untitled', max_length=128)),
                 ('due_time', models.DateTimeField(default=todolist.models.item.one_hour_later)),
                 ('status', models.CharField(default='UNDONE', max_length=10)),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='item_set', to=settings.AUTH_USER_MODEL)),

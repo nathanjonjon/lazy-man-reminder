@@ -19,7 +19,7 @@ class Item(models.Model):
     owner = models.ForeignKey(
         User, related_name='item_set', on_delete=models.CASCADE, null=False
     )
-    title = models.CharField(default='Untitled', max_length=128)
+    title = models.CharField(blank=True, default='Untitled', max_length=128)
     due_time = models.DateTimeField(default=one_hour_later, blank=False)
     status = models.CharField(max_length=10, default='UNDONE')
 
