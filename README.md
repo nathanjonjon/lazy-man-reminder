@@ -23,7 +23,7 @@ A full-stack project for users to create todo list with timer reminding them of 
 ## Technologies
 Project is created with:
 * React
-* Django Rest Frame Work
+* Django Rest FrameWork
 * Websocket / Django Channels
 * Django-Q
 
