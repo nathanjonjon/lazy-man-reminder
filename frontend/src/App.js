@@ -7,6 +7,7 @@ import { map } from "rxjs/operators"
 import { ajax } from "rxjs/ajax"
 import Login from "./pages/Login"
 import Todolist from "./pages/Todolist"
+import Websocket from './Websocket'
 
 const login = (credentials = {}) =>
   ajax({
@@ -50,6 +51,8 @@ function ConfigureAuth({ children }) {
   )
 }
 
+
+
 export default function App() {
   return (
     <Auth loginCall={login} meCall={me} refreshTokenCall={refresh}>
@@ -60,6 +63,7 @@ export default function App() {
               <Login />
             </GuestRoute>
             <AuthRoute path="/" exact redirectTo="/login">
+              <Websocket />
               <Todolist />
             </AuthRoute>
           </Switch>

@@ -3,7 +3,6 @@ import { rj, useRunRj } from 'react-rocketjump'
 import { ajax } from 'rxjs/ajax'
 import { useAuthActions, useAuthUser } from 'use-eazy-auth'
 import TodoItem from '../components/TodoItem'
-import Websocket from '../components/Websocket'
 import DateTimePicker from 'react-datetime-picker';
 import Modal from 'react-modal';
 import { useForm } from "react-hook-form"
@@ -90,13 +89,11 @@ export default function Todolist() {
                     <h1>
                         📙 Lazy Man Reminder of <i>@{user.username}</i>
                     </h1>
-                    <Websocket />
                 </div>
                 <div className="text-right">
                     <button className="btn-secondary" onClick={logout}>Log Out</button>
                     <button className="btn-warning" onClick={openModal}>Add Todo</button>
                 </div>
-
                 <Modal
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
@@ -117,7 +114,6 @@ export default function Todolist() {
                         />
                         <input type="submit" className="btn-warning" />
                     </form>
-
                 </Modal>
 
 
