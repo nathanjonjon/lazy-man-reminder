@@ -21,7 +21,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             )  # Setting the group name as the pk of the user primary key as it is unique to each user. The group name is used to communicate with the user.
             await self.channel_layer.group_add(self.group_name, self.channel_name)
             logger.info('-------------websocket-connection-accpeted--------------')
-            await self.accept("subprotocol")
+            await self.accept()
 
     # Function to disconnet the Socket
     async def disconnect(self, close_code):
@@ -30,6 +30,6 @@ class NotificationConsumer(AsyncWebsocketConsumer):
         # pass
 
     # Custom Notify Function which can be called from Views or api to send message to the frontend
-    # async def notify(self, event):
-    #     logger.info('-------------websocket-message-sent--------------')
-    #     await self.send(text_data=json.dumps(event))
+    async def notify(self, event):
+        logger.info('-------------websocket-message-sent--------------')
+        await self.send(text_data=json.dumps(event))

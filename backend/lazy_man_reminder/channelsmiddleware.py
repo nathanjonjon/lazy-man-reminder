@@ -69,4 +69,4 @@ class TokenAuthMiddleware:
         return await self.app(dict(scope), receive, send)
 
 
-TokenAuthMiddlewareStack = lambda inner: TokenAuthMiddleware(AuthMiddlewareStack(inner))
+# TokenAuthMiddlewareStack = lambda inner: TokenAuthMiddleware(AuthMiddlewareStack(inner))
