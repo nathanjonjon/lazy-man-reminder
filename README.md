@@ -1,4 +1,4 @@
-# lazy-man-reminder
+# Lazy Man Reminder
 
 ## Table of contents
 * [General info](#general-info)
@@ -7,8 +7,7 @@
 * [Usage](#usage)
 
 ## General Info
-A full-stack project for users to create todo list where they can create tasks, set deadlines and change the status of the tasks. 
-There is a reminder implemented with WebSocket that notifies the users that a task failed when it remains undone with the deadline expired.
+A full-stack project for users to create todo list where they can create tasks, set deadlines and change the status of the tasks. There is a reminder implemented with `WebSocket` that notifies the users that a task failed when it remains undone with the deadline expired.
 ![](https://github.com/nathanjonjon/lazy-man-reminder/blob/main/todo.png)
 
 
