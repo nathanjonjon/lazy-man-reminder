@@ -23,7 +23,7 @@ A full-stack project for users to create todo list where they can create tasks, 
 ## Technologies
 Project is created with:
 * React
-* Django Rest Frame Work
+* Django Rest Framework
 * WebSocket / Django Channels
 * Django-Q
 
