@@ -1,4 +1,4 @@
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 import json, logging
 from asgiref.sync import async_to_sync
 
@@ -6,10 +6,9 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-class NotificationConsumer(WebsocketConsumer):
-
+class NotificationConsumer(AsyncWebsocketConsumer):
     # Function to connect to the websocket
-    def connect(self):
+    async def connect(self):
         # Checking if the User is logged in
         if self.scope["user"].is_anonymous:
             # Reject the connection
@@ -20,19 +19,17 @@ class NotificationConsumer(WebsocketConsumer):
             self.group_name = str(
                 self.scope["user"].pk
             )  # Setting the group name as the pk of the user primary key as it is unique to each user. The group name is used to communicate with the user.
-            async_to_sync(self.channel_layer.group_add)(
-                self.group_name, self.channel_name
-            )
+            await self.channel_layer.group_add(self.group_name, self.channel_name)
             logger.info('-------------websocket-connection-accpeted--------------')
-            self.accept()
+            await self.accept()
 
     # Function to disconnet the Socket
-    def disconnect(self, close_code):
+    async def disconnect(self, close_code):
         logger.info('-------------websocket-disonnected--------------')
-        self.close()
+        await self.close()
         # pass
 
     # Custom Notify Function which can be called from Views or api to send message to the frontend
-    def notify(self, event):
+    async def notify(self, event):
         logger.info('-------------websocket-message-sent--------------')
-        self.send(text_data=json.dumps(event))
+        await self.send(text_data=json.dumps(event))

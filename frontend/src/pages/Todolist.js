@@ -94,7 +94,6 @@ export default function Todolist() {
                     <button className="btn-secondary" onClick={logout}>Log Out</button>
                     <button className="btn-warning" onClick={openModal}>Add Todo</button>
                 </div>
-
                 <Modal
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
@@ -115,7 +114,6 @@ export default function Todolist() {
                         />
                         <input type="submit" className="btn-warning" />
                     </form>
-
                 </Modal>
 
 
