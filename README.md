@@ -7,7 +7,7 @@
 * [Usage](#usage)
 
 ## General Info
-A full-stack project for users to create todo list with timer reminding them of deadlines of the tasks.
+A full-stack project for users to create todo list where they can create tasks, set deadlines and change the status of the tasks. There is a reminder implemented with WebSocket that notifys the users that a task failed when it remains undone with the deadline expired.
 ![](https://github.com/nathanjonjon/lazy-man-reminder/blob/main/todo.png)
 
 
@@ -24,7 +24,7 @@ A full-stack project for users to create todo list with timer reminding them of 
 Project is created with:
 * React
 * Django Rest Frame Work
-* Websocket / Django Channels
+* WebSocket / Django Channels
 * Django-Q
 
 ## Usage
