@@ -31,7 +31,8 @@ export default function Todolist() {
     const { user, token } = useAuthUser()
     const { logout } = useAuthActions()
     const [search, setSearch] = useState('')
-    const [{ data: items }] = useRunRj(ItemState, [search], false)
+    const [needReload, setNeedReload] = useState(false)
+    const [{ data: items }] = useRunRj(ItemState, [search, needReload], false)
     const [modalIsOpen, setIsOpen] = useState(false);
     const { register, handleSubmit } = useForm()
     const [value, onChange] = useState(new Date());
@@ -69,6 +70,7 @@ export default function Todolist() {
             .then(function (response) {
                 const status = response.status;
                 if (status === 201) {
+                    setNeedReload(!needReload)
                     console.log("Success")
                     closeModal()
                 }
@@ -129,7 +131,7 @@ export default function Todolist() {
                 <div className='list-item mt-5'>
                     {items &&
                         items.map((item) => (
-                            <TodoItem key={item.id} item={item} />
+                            <TodoItem key={item.id} item={item} needReload={needReload} setNeedReload={setNeedReload} />
                         ))}
                 </div>
             </div>
