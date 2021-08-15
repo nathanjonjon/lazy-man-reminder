@@ -1,5 +1,7 @@
 import { useAuthUser } from 'use-eazy-auth'
 import React, { useEffect } from 'react'
+import { setNeedReload } from './state'
+
 const Websocket = () => {
     const { token } = useAuthUser()
     var loc = window.location
@@ -16,6 +18,7 @@ const Websocket = () => {
             console.log('message', e)
             console.log(e.data)
             alert(e.data)
+            setNeedReload(2)
         }
 
         // Socket Connet Functionality

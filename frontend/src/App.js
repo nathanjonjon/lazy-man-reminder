@@ -51,8 +51,6 @@ function ConfigureAuth({ children }) {
   )
 }
 
-
-
 export default function App() {
   return (
     <Auth loginCall={login} meCall={me} refreshTokenCall={refresh}>

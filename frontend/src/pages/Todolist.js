@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { rj, useRunRj } from 'react-rocketjump'
-import { ajax } from 'rxjs/ajax'
+import { useEffect, useState } from 'react'
 import { useAuthActions, useAuthUser } from 'use-eazy-auth'
 import TodoItem from '../components/TodoItem'
 import DateTimePicker from 'react-datetime-picker';
 import Modal from 'react-modal';
 import { useForm } from "react-hook-form"
+import { useGlobalState, setNeedReload } from '../state'
 
 const customStyles = {
     content: {
@@ -18,24 +17,39 @@ const customStyles = {
     },
 };
 
-const ItemState = rj({
-    effectCaller: rj.configured(),
-    effect: (token) => (search = '') =>
-        ajax.getJSON(`/items/?search=${search}`, {
-            Authorization: `Bearer ${token}`,
-        }),
-})
-
 
 export default function Todolist() {
     const { user, token } = useAuthUser()
     const { logout } = useAuthActions()
     const [search, setSearch] = useState('')
-    const [needReload, setNeedReload] = useState(false)
-    const [{ data: items }] = useRunRj(ItemState, [search, needReload], false)
+    const [needReload] = useGlobalState('needReload')
+    const [items, setItems] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false);
     const { register, handleSubmit } = useForm()
     const [value, onChange] = useState(new Date());
+
+    useEffect(() => {
+        fetch(`/items/?search=${search}`, {
+            cache: 'no-cache',
+            headers: {
+                'content-type': 'application/json',
+                "Authorization": `Bearer ${token}`
+            },
+            method: 'GET',
+            mode: 'cors',
+            redirect: 'follow',
+            referrer: 'no-referrer',
+        })
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data);
+                setItems(data)
+                setNeedReload(0)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }, [search, needReload, token])
 
     function openModal() {
         setIsOpen(true);
@@ -70,7 +84,7 @@ export default function Todolist() {
             .then(function (response) {
                 const status = response.status;
                 if (status === 201) {
-                    setNeedReload(!needReload)
+                    setNeedReload(1)
                     console.log("Success")
                     closeModal()
                 }
@@ -131,7 +145,7 @@ export default function Todolist() {
                 <div className='list-item mt-5'>
                     {items &&
                         items.map((item) => (
-                            <TodoItem key={item.id} item={item} needReload={needReload} setNeedReload={setNeedReload} />
+                            <TodoItem key={item.id} item={item} />
                         ))}
                 </div>
             </div>

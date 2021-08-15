@@ -1,6 +1,7 @@
 import { useAuthUser } from 'use-eazy-auth'
+import { setNeedReload } from '../state'
 
-export default function TodoItem({ item, needReload, setNeedReload }) {
+export default function TodoItem({ item }) {
     const { token } = useAuthUser()
     function delete_item() {
         fetch(`/items/${item.id}`, {
@@ -17,7 +18,7 @@ export default function TodoItem({ item, needReload, setNeedReload }) {
             .then(function (response) {
                 const status = response.status;
                 if (status === 204) {
-                    setNeedReload(!needReload);
+                    setNeedReload(1);
                     console.log("Success");
                 }
                 else {
@@ -43,7 +44,7 @@ export default function TodoItem({ item, needReload, setNeedReload }) {
             .then(function (response) {
                 const status = response.status;
                 if (status === 200) {
-                    setNeedReload(!needReload);
+                    setNeedReload(1);
                     console.log("Success");
                 }
                 else {
