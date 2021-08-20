@@ -33,5 +33,5 @@ Project is created with:
   $ docker-compose build
   $ docker-compose up
   ```
-- Open your browser, go to `http://localhost:3000/` and log in as admin with password: `lazyman`
+- Open your browser, go to `http://localhost:3000/` and log in as `nathan` with password: `lazyman`
 - For more details, go to `http://localhost:8000/playground` and play with the Swagger API document
