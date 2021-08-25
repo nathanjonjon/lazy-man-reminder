@@ -11,7 +11,3 @@ class MeView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
-
-
-def base(request):
-    return render(request, './base.html', {})

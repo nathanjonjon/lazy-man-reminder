@@ -9,5 +9,4 @@ router.register(r'items', views.ItemViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('me/', views.MeView.as_view()),
-    path('base/', views.base),
 ]
