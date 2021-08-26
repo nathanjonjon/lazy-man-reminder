@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('./assets/paper.webp') repeat;
+  background: url('./assets/login.svg') repeat;
 }
 
 code {
@@ -14,12 +14,36 @@ code {
 }
 
 h1 {
-  color: #1a1813;
+  color: #656565;
+  font-size: 36pt;
+  text-align: center;
 }
 
 h2 {
-  color: #575339;
+  color: #656565;
+  font-size: 24pt;
+  font-weight: 350;
+  margin: 40mm, 0em, 10em, 0em;
+  text-align: center;
+  letter-spacing: 5%;
 }
 
+.loginframe {
+  background-color: #F3F3F3;
+  margin: 10pt;
+}
 
+h3{
+  color: #656565;
+  font-size: 18pt;
+  font-weight: 250;
+  margin: 10mm, 0em, 10em, 0em;
+  text-align: center;
+  letter-spacing: 5%;
+}
+
+button{
+  color: #055AA4;
+  font-size: 22pt;
+}
 

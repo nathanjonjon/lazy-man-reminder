@@ -14,7 +14,7 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
-        color: 'white',
+        color: 'black',
         transform: 'translate(-50%, -50%)',
     },
 };
@@ -97,12 +97,16 @@ export default function Todolist() {
                     <button className="btn-secondary" onClick={logout}>Log Out</button>
                     <button className="btn-warning" onClick={openModal}>Add Todo</button>
                 </div>
+                
                 <Modal
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
                     style={customStyles}
                     contentLabel="Add Todo Modal"
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
                 >
                     <div className="mymodal">
                         <button className="btn-close" type="button" style={{ top: 0, right: 0, position: "absolute" }} onClick={closeModal}></button>

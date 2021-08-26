@@ -14,7 +14,7 @@ export default function Login() {
 
     return (
         <form
-            className="row mt-5 p-2"
+            class="row mt-5 p-2"
             onSubmit={e => {
                 e.preventDefault()
                 if (username !== "" && password !== "") {
@@ -22,15 +22,17 @@ export default function Login() {
                 }
             }}
         >
-            <div className="col-md-4 offset-md-4">
-                <div className="mb-3">
-                    <h1>📙 Lazy Man Reminder</h1>
-                    <h2 className="mt-4">Please Log In</h2>
+
+            <div class="col-md-4 offset-md-4 justify-content-md-center">
+                <div class="mb-3 loginframe">
+                    <h2 class="mt-4 auto">Wellcome to</h2>
+                    <h1 class="title">Lazy Man Reminder</h1>
+                    <h3 class="mt-4">Please enter your account.</h3>
                 </div>
-                <div className="form-group">
+                <div class="form-group">
                     <input
                         placeholder="@username"
-                        className="form-control"
+                        class="form-control"
                         type="text"
                         value={username}
                         onChange={e => {
@@ -39,10 +41,10 @@ export default function Login() {
                         }}
                     />
                 </div>
-                <div className="form-group">
+                <div class="form-group">
                     <input
-                        placeholder="password"
-                        className="form-control"
+                        placeholder="Password"
+                        class="form-control"
                         type="password"
                         value={password}
                         onChange={e => {
@@ -51,11 +53,13 @@ export default function Login() {
                         }}
                     />
                 </div>
-                <button className="btn btn-light" disabled={loginLoading}>
-                    {!loginLoading ? "Login!" : "Logged in..."}
+                <div class="col-md-4 offset-md-5 btnlogin">
+                    <button class="btn btn-light" disabled={loginLoading}>
+                    {!loginLoading ? "Log In" : "Logged in..."}
                 </button>
+                </div>
                 {loginError && (
-                    <div className="alert alert-danger mt-3">
+                    <div class="alert alert-danger mt-3">
                         Bad combination of username and password.
                     </div>
                 )}

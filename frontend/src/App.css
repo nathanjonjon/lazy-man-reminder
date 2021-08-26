@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.title{
+  font-size: 36px;
+  font-weight: 600;
+  color: #656565;
+}
+.mymodal{
+  color:antiquewhite;
+  font-size: 1.8rem;
+  position: relative;
+  margin-top: 35rem;
+  border-radius: 4rem;
+}
+
+.btnlogin{
+  background-color: #055AA4;
+  font-size: 22pt;
+  margin-top: 12pt;
+}
+.form-group{
+  margin-top: 10pt;
+}
