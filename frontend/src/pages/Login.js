@@ -14,7 +14,7 @@ export default function Login() {
 
     return (
         <form
-            class="row mt-5 p-2"
+            class="row mt-5 p-2 loginframe"
             onSubmit={e => {
                 e.preventDefault()
                 if (username !== "" && password !== "") {
@@ -24,15 +24,15 @@ export default function Login() {
         >
 
             <div class="col-md-4 offset-md-4 justify-content-md-center">
-                <div class="mb-3 loginframe">
+                <div class="mb-3">
                     <h2 class="mt-4 auto">Wellcome to</h2>
                     <h1 class="title">Lazy Man Reminder</h1>
                     <h3 class="mt-4">Please enter your account.</h3>
                 </div>
-                <div class="form-group">
+                <div class="form-group input">
                     <input
                         placeholder="@username"
-                        class="form-control"
+                        class="input"
                         type="text"
                         value={username}
                         onChange={e => {
@@ -41,10 +41,10 @@ export default function Login() {
                         }}
                     />
                 </div>
-                <div class="form-group">
+                <div class="form-group input">
                     <input
                         placeholder="Password"
-                        class="form-control"
+                        class="input"
                         type="password"
                         value={password}
                         onChange={e => {
@@ -53,8 +53,8 @@ export default function Login() {
                         }}
                     />
                 </div>
-                <div class="col-md-4 offset-md-5 btnlogin">
-                    <button class="btn btn-light" disabled={loginLoading}>
+                <div class="col-md-3 offset-md-2 justify-content-md-center">
+                    <button class="btn button btn-light" disabled={loginLoading}>
                     {!loginLoading ? "Log In" : "Logged in..."}
                 </button>
                 </div>

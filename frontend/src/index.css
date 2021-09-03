@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('./assets/login.svg') repeat;
+  background: url('./assets/login-BG-1920x1080.svg') repeat;
 }
 
 code {
@@ -15,35 +15,72 @@ code {
 
 h1 {
   color: #656565;
-  font-size: 36pt;
+  font-size: 28pt;
+  font-weight: 500;
   text-align: center;
+  letter-spacing: 0.1rem;
 }
 
 h2 {
   color: #656565;
-  font-size: 24pt;
-  font-weight: 350;
-  margin: 40mm, 0em, 10em, 0em;
+  font-size: 16pt;
+  font-weight: 400;
+  margin: 4em 0rem 0rem 0rem;
+  padding: 2rem 0rem;
   text-align: center;
-  letter-spacing: 5%;
+  letter-spacing: 0.15rem;
 }
 
 .loginframe {
   background-color: #F3F3F3;
-  margin: 10pt;
+  margin: 20em 23rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 h3{
   color: #656565;
-  font-size: 18pt;
-  font-weight: 250;
-  margin: 10mm, 0em, 10em, 0em;
+  font-size: 14pt;
+  font-weight: 300;
+  margin: 0px 0px 2rem 0px;
   text-align: center;
   letter-spacing: 5%;
 }
 
-button{
-  color: #055AA4;
-  font-size: 22pt;
+::-webkit-input-placeholder {
+  color: #bebebe;
 }
 
+input[type=text] {
+  width: 100%;
+  padding: 20px;
+  margin: 8px 0px 30px 0px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  border: none;
+  color: #656565;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+input[type=password] {
+  width: 100%;
+  padding: 20px;
+  margin: 8px 0px 100px 0px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  border: none;
+  color: #656565;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.button {
+  width: 195px;
+  height: 57px;
+  background-color: #055AA4;
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  margin: 0rem 0rem 5rem 0rem;
+  text-align: center;
+  display: inline-block;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
